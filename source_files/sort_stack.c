@@ -6,7 +6,7 @@
 /*   By: poliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 11:10:46 by poliveir          #+#    #+#             */
-/*   Updated: 2021/07/15 14:05:18 by poliveir         ###   ########.fr       */
+/*   Updated: 2021/07/18 13:32:12 by poliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,19 @@ static void	sort_small_stack(t_list **stack_a, t_list **stack_b, int lst_size)
 
 static void	sort_large_stack(t_list **stack_a, t_list **stack_b, int lst_size)
 {
+	int	parts;
+	int	r;
+
 	if (lst_size <= 100)
-		parts_to_b(stack_a, stack_b, lst_size, 7);
+		parts = 5;
 	else
-		parts_to_b(stack_a, stack_b, lst_size, 13);
+		parts = 11;
+	r = (lst_size / parts) / 2;
+	parts_to_b(stack_a, stack_b, lst_size, parts);
 	while (ft_lstsize(*stack_a) > 5 && !sorted(stack_a))
 	{
 		top_a(stack_a, ft_lstsize(*stack_a), find_i(stack_a, min(stack_a)));
-		if (max(stack_b) && (*(int *)(*stack_a)->content > *max(stack_b)))
+		if (max(stack_b) && (*(int *)(*stack_a)->content > *max(stack_b) - r))
 			top_b(stack_b, ft_lstsize(*stack_b), find_i(stack_b, max(stack_b)));
 		pb(stack_a, stack_b);
 	}

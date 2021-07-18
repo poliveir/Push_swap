@@ -6,7 +6,7 @@
 /*   By: poliveir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 14:06:31 by poliveir          #+#    #+#             */
-/*   Updated: 2021/07/15 14:06:41 by poliveir         ###   ########.fr       */
+/*   Updated: 2021/07/18 13:28:01 by poliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,26 +75,27 @@ void	parts_to_b(t_list **a, t_list **b, int lst_size, int parts)
 {
 	int	i;
 	int	j;
-	int	qtr;
+	int	max_i;
 	int	size;
+	int	r;
 
 	i = 0;
-	qtr = lst_size / parts;
+	max_i = lst_size / parts;
+	r = max_i / 2;
 	size = lst_size;
 	while (i < parts - 1)
 	{
 		j = 0;
 		while (j < (lst_size / parts))
 		{
-			top_a(a, size, find_best(a, size, qtr));
-			if (max(b) && (*(int *)(*a)->content > *max(b)
-				|| *(int *)(*a)->content == *max(b) - 1))
+			top_a(a, size, find_best(a, size, max_i));
+			if (max(b) && (*(int *)(*a)->content > *max(b) - r))
 				top_b(b, ft_lstsize(*b), find_i(b, max(b)));
 			size--;
 			pb(a, b);
 			j++;
 		}
-		qtr += lst_size / parts;
+		max_i += lst_size / parts;
 		i++;
 	}
 }
